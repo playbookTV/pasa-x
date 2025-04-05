@@ -29,7 +29,7 @@ Pasa is a Chrome extension that uses AI to help job seekers track and optimize t
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/pasa-x.git
+   git clone https://github.com/playbookTV/pasa-x.git
    cd pasa-x
    ```
 
