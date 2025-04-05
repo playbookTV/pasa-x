@@ -1,87 +1,78 @@
 # Pasa - AI Job Application Assistant
 
-A Chrome extension that automates and enhances the job application process using AI.
+Pasa is a Chrome extension that uses AI to help job seekers track and optimize their job applications.
 
 ## Features
 
-- **Autofill Application Forms**: Automatically fill out job applications on LinkedIn, Indeed, Wellfound, and more
-- **Resume Analyzer**: AI-powered resume scoring and suggestions to match job descriptions
-- **Cover Letter Generator**: Create tailored cover letters for each job using AI
-- **Application Tracker**: Keep track of all your job applications in one place
+- **Resume Analysis**: Get instant feedback and scoring on your resume
+- **Cover Letter Generation**: AI-powered cover letter creation tailored to job descriptions
+- **Application Tracking**: Manage all your job applications in one place
+- **Job Detection**: Automatically detects job listings on popular job sites
+- **Metrics Dashboard**: Track your application progress and success rates
 
-## Project Structure
+## Tech Stack
 
-```
-/
-├── src/                    # Source code
-│   ├── components/         # React components
-│   │   └── ui/             # Shadcn UI components
-│   ├── lib/                # Utilities and helper functions
-│   ├── hooks/              # Custom React hooks
-│   ├── styles/             # CSS and Tailwind styles
-│   ├── background.ts       # Extension background script
-│   ├── content.ts          # Content script for injecting UI
-│   └── popup.tsx           # Popup UI entry point
-│
-├── public/                 # Static assets
-│   ├── manifest.json       # Chrome extension manifest
-│   └── popup.html          # HTML for extension popup
-│
-├── prisma/                 # Database schema and migrations
-│
-└── docs/                   # Documentation
-    ├── prd.md              # Product Requirements Document
-    └── userflow.md         # User Flow Documentation
-```
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **Backend**: Prisma, Node.js
+- **Database**: Neon (Postgres)
+- **AI Integration**: OpenAI
+- **Build Tools**: Vite, pnpm
 
 ## Development
 
 ### Prerequisites
 
-- Node.js (v18+)
-- pnpm (v8+)
-- Chrome browser
+- Node.js 18+
+- pnpm
 
 ### Setup
 
-1. Clone the repository
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/pasa-x.git
+   cd pasa-x
+   ```
+
 2. Install dependencies:
    ```
    pnpm install
    ```
-3. Start the development server:
+
+3. Set up environment variables:
+   ```
+   cp .env.example .env
+   ```
+   Then edit the `.env` file with your database and API keys.
+
+4. Run the development server:
    ```
    pnpm dev
    ```
-4. Load the extension in Chrome:
-   - Go to `chrome://extensions/`
-   - Enable "Developer mode"
-   - Click "Load unpacked" and select the `dist` folder
 
-### Building for Production
+### Building the Chrome Extension
+
+To build the Chrome extension:
 
 ```
-pnpm build
+pnpm build-chrome
 ```
 
-## Tech Stack
+Then load the `dist` directory as an unpacked extension in Chrome.
 
-- Vite + React + TypeScript
-- Tailwind CSS + ShadcnUI + Framer Motion
-- Prisma + NeonDB
-- OpenAI for AI capabilities
-- Stripe for payment processing
+## Database
 
-## Roadmap
+The project uses Prisma with a PostgreSQL database. To initialize the database:
 
-- [x] Phase 1: Project Setup, UI Scaffolding (Week 1)
-- [ ] Phase 2: Resume Analyzer + Upload (Week 2) 
-- [ ] Phase 3: Cover Letter Generator + Storage (Week 3)
-- [ ] Phase 4: Autofill on Job Boards (Week 4-5)
-- [ ] Phase 5: Stripe Integration + Tiers (Week 6)
-- [ ] Phase 6: Launch on Product Hunt (Week 7)
-- [ ] Phase 7: Post-launch Iterations (Week 8-10)
+```
+pnpm prisma migrate dev
+pnpm prisma generate
+```
+
+To view your data with Prisma Studio:
+```
+pnpm prisma studio
+```
 
 ## License
 
-[MIT License](LICENSE) 
+[MIT](LICENSE) 
