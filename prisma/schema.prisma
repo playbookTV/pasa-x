@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  fullName     String
+  passwordHash String?
+  currentRole  String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  googleId     String?       @unique
+  hasResume    Boolean       @default(false)
+  applications Application[]
+  coverLetters CoverLetter[]
+  resume       Resume?
+}
+
+model Resume {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  fileUrl       String
+  fileName      String
+  fileSize      Int
+  uploadedAt    DateTime @default(now())
+  scoreOverall  Int?
+  scoreKeywords Int?
+  scoreFormat   Int?
+  feedback      String?
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model CoverLetter {
+  id            String       @id @default(cuid())
+  userId        String
+  jobTitle      String
+  company       String
+  content       String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  applicationId String?
+  application   Application? @relation(fields: [applicationId], references: [id])
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Application {
+  id           String        @id @default(cuid())
+  userId       String
+  jobTitle     String
+  company      String
+  jobUrl       String?
+  status       String
+  appliedAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  coverLetters CoverLetter[]
+}
+
+model Subscription {
+  id               String    @id @default(cuid())
+  userId           String    @unique
+  stripeCustomerId String?   @unique
+  planType         String
+  isActive         Boolean   @default(true)
+  startDate        DateTime  @default(now())
+  endDate          DateTime?
+  autoRenew        Boolean   @default(true)
+}

@@ -1,0 +1,172 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Absolutely — here’s a solid, production-ready Cursor project setup and ruleset for Pasa, designed to help you:
+	•	Recognize & reuse components intelligently
+	•	Add new features with DRY best practices
+	•	Track bugs, document APIs, and monitor progress
+	•	Work effectively within Cursor’s AI-enhanced coding flow
+
+⸻
+
+🧠 Cursor AI Project Rules for Pasa
+
+🗂 1. Project Structure Rules
+
+Use a modular, scalable architecture:
+
+src/
+│
+├── components/         # Shared & scoped UI components
+│   ├── ui/             # Shadcn-style atomic components
+│   └── shared/         # Reusable across pages (e.g. Header, Modal)
+│
+├── hooks/              # All custom React hooks (e.g. useResumeScore)
+│
+├── lib/                # Utility functions, constants, helpers
+│   ├── ai/             # OpenAI prompt logic
+│   └── api/            # API wrappers (e.g. resume, stripe)
+│
+├── styles/             # Tailwind configs, globals
+│
+├── popup/              # Chrome popup UI
+│   ├── pages/          # Index, Dashboard
+│   └── components/     # Scoped to popup
+│
+├── content/            # Content scripts for job boards
+│
+└── background.ts       # Background logic for the extension
+
+📌 Cursor Tip: Mark src/components, src/hooks, and src/lib as “core knowledge areas” inside Cursor so it can better assist with reuse.
+
+⸻
+
+🔧 2. Cursor Config: .cursor-config.json
+
+{
+  "$schema": "https://raw.githubusercontent.com/cursor-dev/cursor-config/main/schema.json",
+  "projectName": "Pasa – AI Job Assistant",
+  "language": "TypeScript",
+  "framework": "Vite",
+  "workspacePaths": [
+    "src/components",
+    "src/hooks",
+    "src/lib",
+    "src/popup",
+    "src/content",
+    "prisma",
+    "docs"
+  ],
+  "excludedPaths": [
+    "node_modules",
+    "dist",
+    ".git",
+    "public/icons"
+  ],
+  "defaultReadme": "docs/README.md",
+  "commands": {
+    "dev": "pnpm dev",
+    "build": "pnpm build",
+    "lint": "pnpm lint",
+    "format": "pnpm prettier --write .",
+    "test": "pnpm test",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:generate": "npx prisma generate"
+  },
+  "tools": {
+    "tailwind": true,
+    "shadcn": true,
+    "openai": true,
+    "stripe": true,
+    "prisma": true
+  },
+  "suggestions": {
+    "enableInlineSuggestions": true,
+    "enableFileGeneration": true
+  }
+}
+
+
+
+⸻
+
+🧪 3. Best Practices & Coding Standards
+
+Principle	Rules
+DRY	Reuse components/hooks, no copy-pasting UI or logic
+SRP (Single Responsibility)	Keep components/functions focused
+Folder Cohesion	Don’t mix UI, logic, and services in one folder
+Naming Consistency	useXyz, XyzCard.tsx, api/xyz.ts
+Type Safety	Strictly typed props, no any
+OpenAI Prompts	Abstracted in lib/ai/promptHelpers.ts
+API Logic	Wrapped in lib/api/*.ts and documented
+State Management	Use useState, useReducer, or context if needed, but avoid over-engineering
+
+
+
+⸻
+
+📖 4. Docs: Progress, Features, Bugs
+
+docs/README.md
+
+General overview, setup, and vision.
+
+docs/features.md
+
+# ✨ Features Implemented
+
+- [x] Resume upload + score
+- [x] Cover letter generator
+- [x] Autofill for LinkedIn
+- [ ] Autofill for Indeed
+- [ ] Stripe subscription logic
+
+docs/api.md
+
+# 🛠 API Endpoints
+
+## POST /api/resume-analyze
+> Analyze resume and return score + suggestions
+
+## POST /api/generate-cover-letter
+> Takes resume + job description, returns letter
+
+docs/bugs.md
+
+# 🐞 Known Issues / Bugs
+
+- [ ] Autofill fails on Wellfound custom fields
+- [ ] Popup layout broken on Firefox
+
+docs/changelog.md
+
+## [v0.1.1] – April 3, 2025
+- Added `vite.config.ts`
+- Structured folder for popup and content
+- Setup Tailwind, Shadcn, and OpenAI wrapper
+
+
+
+⸻
+
+🛠 5. Cursor Project Rules Summary
+
+Rule	Description
+✅ Reuse intelligently	Cursor will always suggest existing components from src/components and hooks from src/hooks
+✅ Recognize project structure	Mark all functional paths in workspacePaths
+✅ DRY by default	Prevent Cursor from regenerating what already exists
+✅ Encourage docs	AI suggestions will link to docs/features.md and docs/api.md
+✅ Maintain prompt quality	OpenAI prompts and logic are modularized and documented
+
+
+
+⸻
+
+Would you like:
+	•	This config written as a downloadable .cursor-config.json?
+	•	A starter docs/ folder with the features.md, api.md, bugs.md, and changelog.md files prefilled?
+
+Or should we spin up the popup UI or a live resume analyzer route next?

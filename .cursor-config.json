@@ -1,0 +1,41 @@
+{
+  "projectName": "Pasa \u2013 AI Job Assistant",
+  "language": "TypeScript",
+  "framework": "Vite",
+  "workspacePaths": [
+    "src/components",
+    "src/hooks",
+    "src/lib",
+    "src/popup",
+    "src/content",
+    "prisma",
+    "docs"
+  ],
+  "excludedPaths": [
+    "node_modules",
+    "dist",
+    ".git",
+    "public/icons"
+  ],
+  "defaultReadme": "docs/README.md",
+  "commands": {
+    "dev": "pnpm dev",
+    "build": "pnpm build",
+    "lint": "pnpm lint",
+    "format": "pnpm prettier --write .",
+    "test": "pnpm test",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:generate": "npx prisma generate"
+  },
+  "tools": {
+    "tailwind": true,
+    "shadcn": true,
+    "openai": true,
+    "stripe": true,
+    "prisma": true
+  },
+  "suggestions": {
+    "enableInlineSuggestions": true,
+    "enableFileGeneration": true
+  }
+}

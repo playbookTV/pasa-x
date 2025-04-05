@@ -1,0 +1,44 @@
+{
+  "rules": [
+    {
+      "type": "style",
+      "description": "Use DRY (Don't Repeat Yourself). Reuse existing components, hooks, and utils from /src/components, /src/hooks, and /src/lib instead of duplicating logic."
+    },
+    {
+      "type": "style",
+      "description": "Follow consistent naming conventions: use `useXyz` for hooks, `XyzCard.tsx` for UI, and snake_case for filenames if not React components."
+    },
+    {
+      "type": "structure",
+      "description": "All reusable code (hooks, utils, types) must live in /src/hooks or /src/lib. Avoid creating these in component folders."
+    },
+    {
+      "type": "docs",
+      "description": "Every new API or utility function must be documented in `docs/api.md` with description, inputs, and expected outputs."
+    },
+    {
+      "type": "docs",
+      "description": "All features should be added to `docs/features.md` with a [ ] or [x] checkbox for tracking."
+    },
+    {
+      "type": "docs",
+      "description": "Any bugs found should be logged in `docs/bugs.md` and referenced by filename + line number if possible."
+    },
+    {
+      "type": "logic",
+      "description": "OpenAI prompts should be abstracted into `/src/lib/ai/prompts.ts` with named functions and reusable templates."
+    },
+    {
+      "type": "testing",
+      "description": "Prefer functional tests over unit tests for UI flows. Use mock data where needed. Keep test files next to the components they test."
+    },
+    {
+      "type": "refactor",
+      "description": "Cursor should suggest extracting logic into hooks or utils when a file exceeds 100 lines or repeats logic more than twice."
+    },
+    {
+      "type": "architecture",
+      "description": "Use Vite and React for all new frontend modules. Avoid using Next.js SSR features for the extension."
+    }
+  ]
+}
