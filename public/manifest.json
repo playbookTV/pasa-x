@@ -1,11 +1,22 @@
 {
   "manifest_version": 3,
-  "name": "Pasa",
-  "version": "0.1",
-  "description": "Your AI job application assistant",
+  "name": "Pasa - AI Job Application Assistant",
+  "version": "0.1.0",
+  "description": "Apply to jobs faster with AI-powered resume analysis, cover letter generation, and application auto-fill",
   "action": {
     "default_popup": "popup.html",
-    "default_icon": "icon.png"
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "background": {
     "service_worker": "background.js"
@@ -13,19 +24,94 @@
   "content_scripts": [
     {
       "matches": [
+        "https://*.linkedin.com/jobs/*",
+        "https://*.linkedin.com/*jobs*",
+        "https://*.indeed.com/viewjob*",
+        "https://*.indeed.com/job/*",
+        "https://*.indeed.com/*job*",
+        "https://*.glassdoor.com/job-listing/*",
+        "https://*.glassdoor.com/*job*",
+        "https://*.monster.com/job-detail/*",
+        "https://*.monster.com/*job*",
+        "https://*.ziprecruiter.com/job/*",
+        "https://*.ziprecruiter.com/*job*",
+        "https://*.wellfound.com/jobs/*",
+        "https://*.wellfound.com/*job*",
+        "https://*.greenhouse.io/jobs/*",
+        "https://*.greenhouse.io/job/*",
+        "https://job-boards.greenhouse.io/*/*jobs*",
+        "https://job-boards.greenhouse.io/*/*job*",
+        "https://boards.greenhouse.io/*/*jobs*",
+        "https://boards.greenhouse.io/*/*job*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.linkedin.com/jobs/application/*",
+        "https://*.indeed.com/apply/*",
+        "https://*.greenhouse.io/*",
+        "https://*.lever.co/*",
+        "https://*.workday.com/*",
+        "https://*.myworkdayjobs.com/*",
+        "https://*.smartrecruiters.com/*",
+        "https://*.bamboohr.com/*",
+        "https://*.applicanttracking.com/*",
+        "https://*.jobvite.com/*"
+      ],
+      "js": ["content-autofill.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "widget.js",
+        "widget.html",
+        "assets/*",
+        "*.js",
+        "*.css",
+        "style.css",
+        "jobExtractor.js"
+      ],
+      "matches": [
+        "https://*.linkedin.com/*",
+        "https://*.indeed.com/*",
+        "https://*.glassdoor.com/*",
+        "https://*.monster.com/*",
+        "https://*.ziprecruiter.com/*",
+        "https://*.wellfound.com/*",
+        "https://*.greenhouse.io/*",
+        "https://job-boards.greenhouse.io/*",
+        "https://boards.greenhouse.io/*",
         "<all_urls>"
       ],
-      "js": [
-        "content.js"
-      ]
+      "use_dynamic_url": true
     }
   ],
   "permissions": [
     "storage",
-    "tabs",
-    "scripting"
+    "activeTab",
+    "scripting",
+    "tabs"
   ],
   "host_permissions": [
-    "<all_urls>"
-  ]
+    "https://*.linkedin.com/*",
+    "https://*.indeed.com/*",
+    "https://*.glassdoor.com/*",
+    "https://*.monster.com/*",
+    "https://*.ziprecruiter.com/*",
+    "https://*.wellfound.com/*",
+    "https://*.greenhouse.io/*",
+    "https://job-boards.greenhouse.io/*",
+    "https://boards.greenhouse.io/*",
+    "https://*.lever.co/*",
+    "https://*.workday.com/*", 
+    "https://*.myworkdayjobs.com/*",
+    "https://*.smartrecruiters.com/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' https://*.vercel-storage.com; font-src 'self' https://fonts.gstatic.com;"
+  }
 }

@@ -20,18 +20,14 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        // Chrome extension entry points
-        popup: resolve(__dirname, 'public/popup.html'),
+        main: resolve(__dirname, 'index.html'),
+        popup: resolve(__dirname, 'popup.html'),
+        widget: resolve(__dirname, 'widget.html'),
       },
       output: {
-        entryFileNames: 'assets/[name].js',
-        chunkFileNames: 'assets/[name].js',
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name.endsWith('.css')) {
-            return 'assets/popup.css';
-          }
-          return 'assets/[name].[ext]';
-        },
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: '[name].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
       },
       // Mark Prisma as external to avoid bundling issues
       external: ['.prisma/client/index-browser']
@@ -41,8 +37,6 @@ export default defineConfig({
     cssCodeSplit: false,
     minify: true,
     sourcemap: false,
-    // Don't use absolute paths in generated files
-    base: './'
   },
   server: {
     port: 3000,

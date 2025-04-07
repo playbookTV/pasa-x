@@ -5,40 +5,47 @@ import { Logo } from './Logo';
 interface ClosedJobSiteWidgetProps {
   onClick: () => void;
   compatibility: number;
+  title?: string;
 }
 
-export const ClosedJobSiteWidget: React.FC<ClosedJobSiteWidgetProps> = ({ onClick, compatibility }) => {
+export const ClosedJobSiteWidget: React.FC<ClosedJobSiteWidgetProps> = ({ 
+  onClick, 
+  compatibility,
+  title = 'Job Detected'
+}) => {
   return (
-    <motion.div
-      layout
-      className="w-64 h-20 p-2.5 justify-start items-start gap-2.5 inline-flex overflow-hidden"
+    <div 
+      className="bg-white rounded-lg shadow-lg p-3 cursor-pointer flex items-center space-x-3 hover:shadow-xl transition-shadow duration-300"
       onClick={onClick}
     >
-      <motion.div
-        layout
-        className="grow shrink basis-0 p-3 bg-white rounded-3xl shadow-[0px_0px_2px_0px_rgba(0,0,0,0.15)] shadow-[0px_8px_40px_0px_rgba(0,0,0,0.04)] shadow-[0px_2px_5px_0px_rgba(0,0,0,0.05)] flex-col justify-start items-start gap-4 inline-flex overflow-hidden cursor-pointer"
-      >
-        <motion.div layout className="self-stretch justify-start items-center gap-4 inline-flex">
-          <motion.div layout className="w-11 h-11 relative">
-            <Logo variant="noText" />
-          </motion.div>
-          <motion.div layout className="grow shrink basis-0 h-5 justify-end items-center gap-1.5 flex">
-            <motion.div layout>
-              <motion.span layout className="text-zinc-900 text-sm font-bold font-['Inter'] leading-tight">{compatibility}%</motion.span>
-              <motion.span layout className="text-zinc-900 text-sm font-normal font-['Inter'] leading-tight"> compatible</motion.span>
-            </motion.div>
-            <motion.div layout className="w-5 h-5 relative">
-              <motion.div layout className="w-5 h-5 left-0 top-0 absolute rounded-full border-4 border-black/10" />
-              <motion.div
-                layout
-                className="w-5 h-5 left-0 top-0 absolute rounded-full border-4 border-amber-400"
-                style={{ clipPath: `inset(0 ${100 - compatibility}% 0 0)` }}
-              />
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+      <div className="flex-shrink-0 w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center">
+        <svg 
+          width="24" 
+          height="24" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path 
+            d="M9 5H7C5.89543 5 5 5.89543 5 7V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V7C19 5.89543 18.1046 5 17 5H15M9 5C9 6.10457 9.89543 7 11 7H13C14.1046 7 15 6.10457 15 5M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5" 
+            stroke="white" 
+            strokeWidth="2" 
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+      <div className="max-w-[200px] overflow-hidden">
+        <p className="font-medium text-sm text-gray-800 truncate">{title}</p>
+        <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
+          <div 
+            className="bg-indigo-600 h-2 rounded-full" 
+            style={{ width: `${compatibility}%` }}
+          ></div>
+        </div>
+        <p className="text-xs text-gray-500 mt-1">{compatibility}% match</p>
+      </div>
+    </div>
   );
 };
 

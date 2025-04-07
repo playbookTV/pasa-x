@@ -1,4 +1,4 @@
-import { ClassValue, clsx } from 'clsx';
+import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 /**
@@ -72,4 +72,46 @@ export function safeJsonParse<T>(str: string, fallback: T): T {
   } catch (e) {
     return fallback;
   }
+}
+
+/**
+ * Format a file size in bytes to a human-readable format
+ */
+export function formatFileSize(bytes: number): string {
+  if (bytes === 0) return '0 Bytes';
+  
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+/**
+ * Truncate a string to a certain length and add ellipsis
+ */
+export function truncate(str: string, length: number): string {
+  if (str.length <= length) return str;
+  return str.slice(0, length) + '...';
+}
+
+/**
+ * Capitalize the first letter of a string
+ */
+export function capitalize(str: string): string {
+  if (!str || typeof str !== 'string') return '';
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+/**
+ * Generate initials from a name
+ */
+export function getInitials(name: string): string {
+  if (!name) return '';
+  
+  const parts = name.split(' ');
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+  
+  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
 }
